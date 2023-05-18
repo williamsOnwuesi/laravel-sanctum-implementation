@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+//-----------------------//
+//-Importing Controllers-//
+//-----------------------//
+
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\DashboardController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +23,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+Route::view('login', 'login')->name('login');
+Route::view('register', 'register')->name('register');
+
+Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('dashboard/tokens', [DashboardController::class, 'view_tokens'])->name('tokens');
+
+Route::post('dashboard/create_token', [DashboardController::class, 'create_token'])->name('create_token');
+Route::post('login', [AuthenticationController::class, 'login']);
+Route::post('register', [AuthenticationController::class, 'register']);
+
+
+

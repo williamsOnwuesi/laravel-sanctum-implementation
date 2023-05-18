@@ -3,6 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+//-----------------------//
+//-Importing Controllers-//
+//-----------------------//
+
+use App\Http\Controllers\APIAuthenticationController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +23,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login', [APIAuthenticationController::class, 'login'])->name('login');
