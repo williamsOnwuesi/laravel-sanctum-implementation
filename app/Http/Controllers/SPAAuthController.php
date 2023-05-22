@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SPAAuthController extends Controller
 {
@@ -14,8 +15,6 @@ class SPAAuthController extends Controller
         ]);
 
         if(Auth::attempt($credentials)) {
-
-            $request->session()->regenerate();
 
             return (['message' => 'User succesfully authenticated!.']);
 
