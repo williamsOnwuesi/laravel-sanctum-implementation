@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
     function create_token (Request $request) {
 
-        $token = $request->user()->createToken($request->user()->email.$request->token_name);
+        $token = $request->user()->createToken($request->user()->email.$request->token_name, ['view-tokens']);
 
         return (['token' => $token->plainTextToken]);
 

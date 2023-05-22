@@ -28,10 +28,12 @@ Route::get('/', function () {
 Route::view('login', 'login')->name('login');
 Route::view('register', 'register')->name('register');
 
-Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-Route::get('dashboard/tokens', [DashboardController::class, 'view_tokens'])->name('tokens');
+Route::get('dashboard', [DashboardController::class, 'dashboard'])->middleware('auth:sanctum')->name('dashboard');
+Route::get('dashboard/tokens', [DashboardController::class, 'view_tokens'])->middleware('auth:sanctum')->name('tokens');
 
-Route::post('dashboard/create_token', [DashboardController::class, 'create_token'])->name('create_token');
+Route::post('dashboard/create_token', [DashboardController::class, 'create_token'])->middleware('auth:sanctum')->name('create_token');
+Route::get('dashboard/create_token', function () {return view('errors.404');});
+
 Route::post('login', [AuthenticationController::class, 'login']);
 Route::post('register', [AuthenticationController::class, 'register']);
 

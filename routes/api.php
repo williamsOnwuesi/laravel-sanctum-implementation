@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 //-----------------------//
 
 use App\Http\Controllers\APIAuthenticationController;
+use App\Http\Controllers\MobileAppAuthController;
+use App\Http\Controllers\SPAAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +26,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', [APIAuthenticationController::class, 'login'])->name('login');
+
+Route::post('/api-login', [APIAuthenticationController::class, 'login'])->name('api-login');
+
+Route::post('/mobile-app-register', [MobileAppAuthController::class, 'register']);
+Route::post('/mobile-app-login', [MobileAppAuthController::class, 'login'])->name('mobile-app-login');
+
+Route::post('/spa-login', [SPAAuthController::class, 'login'])->name('spa-login');
+
+
+//Sanctum protected routes
+
+Route::post('/tokens', function () {return (['example' => 'true']);})->middleware('auth:sanctum', 'ability:view-tokens,edit-tokens');
+// Route::post('/tokens', function () {return (['example' => 'true']);})->middleware('auth:sanctum', 'ability:view-tokens,edit-tokens');
